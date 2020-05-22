@@ -26,10 +26,7 @@ class GuitarTabSerializer(serializers.ModelSerializer):
         fields = ('tab_text', 'tab_file', 'link', 'user')
 
 
-class GuitarTabDetailsSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = GuitarTab
-        fields = ('band', 'song', 'user')
+
 
 
 # class GuitarTabDetailsSerializer(serializers.ModelSerializer):
@@ -73,3 +70,9 @@ class UserSerializer(serializers.ModelSerializer):
         email.send()
         user.save()
         return user
+
+class GuitarTabDetailsSerializer(serializers.ModelSerializer):
+    user = UserSerializer()
+    class Meta:
+        model = GuitarTab
+        fields = ('band', 'song', 'user', 'id')
